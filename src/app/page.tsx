@@ -18,11 +18,14 @@ export default function AnaSayfa() {
           >
             Giriş Yap
           </Link>
-          <button className="bg-gray-100 text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors">
+          <Link 
+            href="/register"
+            className="bg-gray-100 text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors inline-block text-center"
+          >
             Kayıt Ol
-          </button>
+          </Link>
         </div>
       </div>
     </div>
   );
-}
+} 
