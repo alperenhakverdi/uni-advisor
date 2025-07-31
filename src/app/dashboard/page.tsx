@@ -213,61 +213,69 @@ export default function KullaniciPaneli() {
               </div>
             )}
 
-            {/* Hızlı Araçlar */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">⚡ Hızlı Araçlar</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Link href="/university-matcher" className="flex items-center p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
-                  <div className="text-purple-600 text-xl mr-3">🎓</div>
-                  <div>
-                    <h4 className="font-medium text-purple-900">Üniversite Karşılaştır</h4>
-                    <p className="text-purple-700 text-xs">Objektif verilerle seç</p>
-                  </div>
-                </Link>
-                <Link href="/chat" className="flex items-center p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                  <div className="text-blue-600 text-xl mr-3">💬</div>
-                  <div>
-                    <h4 className="font-medium text-blue-900">AI Mentor</h4>
-                    <p className="text-blue-700 text-xs">Anında rehberlik al</p>
-                  </div>
-                </Link>
-                <Link href="/profile" className="flex items-center p-3 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
-                  <div className="text-orange-600 text-xl mr-3">⚙️</div>
-                  <div>
-                    <h4 className="font-medium text-orange-900">Profil Ayarları</h4>
-                    <p className="text-orange-700 text-xs">Bilgileri güncelle</p>
-                  </div>
-                </Link>
-              </div>
-            </div>
+           {/* Hızlı Araçlar - Güncellenmiş */}
+<div className="bg-white rounded-lg shadow p-6">
+  <h3 className="text-lg font-semibold text-gray-900 mb-4">⚡ Hızlı Araçlar</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <Link href="/university-matcher" className="flex items-center p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
+      <div className="text-purple-600 text-xl mr-3">🎓</div>
+      <div>
+        <h4 className="font-medium text-purple-900">Üniversite Karşılaştır</h4>
+        <p className="text-purple-700 text-xs">Objektif verilerle seç</p>
+      </div>
+    </Link>
+    <Link href="/skills-development" className="flex items-center p-3 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
+      <div className="text-orange-600 text-xl mr-3">📈</div>
+      <div>
+        <h4 className="font-medium text-orange-900">Beceri Geliştirme</h4>
+        <p className="text-orange-700 text-xs">Kişisel öğrenme planı</p>
+      </div>
+    </Link>
+    <Link href="/chat" className="flex items-center p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+      <div className="text-blue-600 text-xl mr-3">💬</div>
+      <div>
+        <h4 className="font-medium text-blue-900">AI Mentor</h4>
+        <p className="text-blue-700 text-xs">Anında rehberlik al</p>
+      </div>
+    </Link>
+    <Link href="/profile" className="flex items-center p-3 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
+      <div className="text-green-600 text-xl mr-3">🎯</div>
+      <div>
+        <h4 className="font-medium text-green-900">Değerler Testi</h4>
+        <p className="text-green-700 text-xs">Çalışma tercihlerinizi belirleyin</p>
+      </div>
+    </Link>
+  </div>
+</div>
 
           </div>
-
           {/* Sağ Kolon - İstatistikler ve Ekstra */}
           <div className="space-y-6">
             
-            {/* Aktivite İstatistikleri */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">📊 Aktivite Durumu</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Tamamlanan Testler</span>
-                  <span className="font-semibold text-blue-600">3</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">AI Önerileri</span>
-                  <span className="font-semibold text-purple-600">12</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">İncelenen Üniversite</span>
-                  <span className="font-semibold text-green-600">8</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Chat Mesajları</span>
-                  <span className="font-semibold text-orange-600">47</span>
-                </div>
-              </div>
-            </div>
+          {/* İstatistikler - Güncellenmiş */}
+<div className="bg-blue-50 rounded-lg p-6 md:col-span-2">
+  <h2 className="text-lg font-medium text-gray-900 mb-4">
+    İlerleme İstatistikleri
+  </h2>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="text-center">
+      <div className="text-2xl font-bold text-blue-600">3</div>
+      <div className="text-sm text-gray-600">Tamamlanan Test</div>
+    </div>
+    <div className="text-center">
+      <div className="text-2xl font-bold text-green-600">12</div>
+      <div className="text-sm text-gray-600">Meslek Önerisi</div>
+    </div>
+    <div className="text-center">
+      <div className="text-2xl font-bold text-purple-600">8</div>
+      <div className="text-sm text-gray-600">Değer Analizi</div>
+    </div>
+    <div className="text-center">
+      <div className="text-2xl font-bold text-orange-600">15</div>
+      <div className="text-sm text-gray-600">Beceri Değerlendirmesi</div>
+    </div>
+  </div>
+</div>
 
             {/* Son Aktiviteler */}
             <div className="bg-white rounded-lg shadow p-6">

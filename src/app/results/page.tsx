@@ -6,33 +6,46 @@ export default function SonuclarSayfasi() {
     genelPuan: 85,
     uygunBolumler: [
       { 
-        isim: "Bilgisayar Mühendisliği", 
-        uygunlukOrani: 92, 
+        isim: "UX/UI Tasarımcı", 
+        uygunlukOrani: 96, 
         universite: "İTÜ",
         tabanPuan: 450,
-        aciklama: "Matematik ve problem çözme becerileriniz bu bölüm için çok uygun"
+        aciklama: "Yaratıcılık değerleriniz ve hibrit çalışma tercihinizle mükemmel uyum"
       },
       { 
-        isim: "Endüstri Mühendisliği", 
-        uygunlukOrani: 88, 
+        isim: "Ürün Yöneticisi", 
+        uygunlukOrani: 91, 
         universite: "ODTÜ",
         tabanPuan: 445,
-        aciklama: "Analitik düşünce yapınız ve liderlik potansiyeliniz öne çıkıyor"
+        aciklama: "Takım çalışması ve kişisel gelişim odaklı yaklaşımınıza çok uygun"
       },
       { 
-        isim: "İktisat", 
-        uygunlukOrani: 82, 
+        isim: "Dijital Pazarlama Uzmanı", 
+        uygunlukOrani: 87, 
         universite: "Boğaziçi",
         tabanPuan: 420,
-        aciklama: "Sosyal bilimler ilginiz ve matematiksel yeteneğiniz dengeli"
+        aciklama: "Yaratıcılık ve hızlı tempo tercihlerinizle uyumlu dinamik alan"
       }
     ],
     beceriAnalizi: {
       matematiksel: 90,
       sozel: 75,
       analitik: 88,
-      yaraticilik: 70,
+      yaraticilik: 95,
       liderlik: 82
+    },
+    degerlerAnalizi: [
+      { deger: 'Yaratıcılık ve İnovasyon', puan: 95, renk: 'purple' },
+      { deger: 'Kişisel Gelişim', puan: 88, renk: 'blue' },
+      { deger: 'İş-Yaşam Dengesi', puan: 82, renk: 'green' },
+      { deger: 'Özgürlük ve Bağımsızlık', puan: 79, renk: 'indigo' },
+      { deger: 'Yüksek Maaş', puan: 65, renk: 'yellow' }
+    ],
+    calismaTarzi: {
+      ortam: 'Hibrit Çalışma',
+      sekil: 'Takım Çalışması', 
+      tempo: 'Hızlı Tempo',
+      seyahat: 'Az Seyahat'
     },
     gelisimAlanlari: [
       "Sosyal iletişim becerilerini geliştirin",
@@ -119,7 +132,7 @@ export default function SonuclarSayfasi() {
             <div className="bg-white rounded-lg shadow">
               <div className="p-6 border-b">
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Size Önerilen Bölümler
+                  Size Önerilen Meslekler
                 </h3>
               </div>
               <div className="p-6 space-y-6">
@@ -156,13 +169,13 @@ export default function SonuclarSayfasi() {
             </div>
           </div>
 
-          {/* Sağ Kolon - Beceri Analizi */}
+          {/* Sağ Kolon - Analizler */}
           <div className="space-y-6">
             
             {/* Beceri Analizi */}
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Beceri Analizi
+                📊 Beceri Analizi
               </h3>
               <div className="space-y-4">
                 {Object.entries(analizSonucu.beceriAnalizi).map(([beceri, puan]) => (
@@ -188,10 +201,74 @@ export default function SonuclarSayfasi() {
               </div>
             </div>
 
+            {/* Değerler Analizi */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                💎 Değerler Analizi
+              </h3>
+              <div className="space-y-3">
+                {analizSonucu.degerlerAnalizi.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-700">{item.deger}</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-24 bg-gray-200 rounded-full h-2">
+                        <div 
+                          className={`bg-${item.renk}-600 h-2 rounded-full`}
+                          style={{ width: `${item.puan}%` }}
+                        />
+                      </div>
+                      <span className="text-sm text-gray-600 w-10">%{item.puan}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 p-3 bg-purple-50 rounded-lg">
+                <p className="text-sm text-purple-800">
+                  <strong>Analiz:</strong> Yaratıcılık ve kişisel gelişim sizin için en önemli değerler. 
+                  Bu nedenle rutinliği az, sürekli öğrenme imkanı sunan meslekler daha uygun olacaktır.
+                </p>
+              </div>
+            </div>
+
+            {/* Çalışma Tarzı Profili */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                🎯 Çalışma Tarzı Profiliniz
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center p-3 bg-blue-50 rounded-lg">
+                  <div className="text-2xl mb-2">🏠</div>
+                  <div className="text-sm font-medium text-blue-900">{analizSonucu.calismaTarzi.ortam}</div>
+                  <div className="text-xs text-blue-700">Tercih Ettiğiniz</div>
+                </div>
+                <div className="text-center p-3 bg-green-50 rounded-lg">
+                  <div className="text-2xl mb-2">👥</div>
+                  <div className="text-sm font-medium text-green-900">{analizSonucu.calismaTarzi.sekil}</div>
+                  <div className="text-xs text-green-700">Uygun</div>
+                </div>
+                <div className="text-center p-3 bg-orange-50 rounded-lg">
+                  <div className="text-2xl mb-2">⚡</div>
+                  <div className="text-sm font-medium text-orange-900">{analizSonucu.calismaTarzi.tempo}</div>
+                  <div className="text-xs text-orange-700">Seviyorsunuz</div>
+                </div>
+                <div className="text-center p-3 bg-purple-50 rounded-lg">
+                  <div className="text-2xl mb-2">✈️</div>
+                  <div className="text-sm font-medium text-purple-900">{analizSonucu.calismaTarzi.seyahat}</div>
+                  <div className="text-xs text-purple-700">Tercih</div>
+                </div>
+              </div>
+              <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <strong>Önerilen Çalışma Ortamları:</strong> Hibrit çalışma modeli sunan, 
+                  takım çalışmasına dayalı, hızlı tempolu teknoloji şirketleri size uygun olacaktır.
+                </p>
+              </div>
+            </div>
+
             {/* Gelişim Önerileri */}
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Gelişim Önerileri
+                📈 Gelişim Önerileri
               </h3>
               <div className="space-y-3">
                 {analizSonucu.gelisimAlanlari.map((oneri, index) => (

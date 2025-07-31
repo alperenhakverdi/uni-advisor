@@ -18,20 +18,20 @@ export default function AnaSayfa() {
         {/* Ana Akış Butonları */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           
-          {/* Meslek Keşfi */}
+          {/* Kişilik Testi */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <div className="text-blue-600 text-4xl mb-4">🎯</div>
+            <div className="text-blue-600 text-4xl mb-4">🧠</div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
-              Mesleğimi Keşfetmek İstiyorum
+              Kişilik Testi Al
             </h3>
             <p className="text-gray-600 mb-4">
-              Kişilik analizleri ve ilgi alanı testleri ile size uygun meslekleri keşfedin
+              Profesyonel kişilik testleri ile size uygun meslekleri keşfedin
             </p>
             <Link 
               href="/assessment"
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block"
             >
-              Meslek Keşfine Başla
+              Teste Başla
             </Link>
           </div>
 
@@ -114,4 +114,4 @@ export default function AnaSayfa() {
       </div>
     </div>
   );
-}
+} 

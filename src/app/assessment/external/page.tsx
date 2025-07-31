@@ -118,6 +118,156 @@ export default function TestSonucuSayfasi() {
             </div>
           </div>
 
+
+          {/* Değerler ve Çalışma Tercihleri */}
+<div className="mb-8">
+  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+    2. Değerler ve Çalışma Tercihleri
+  </h3>
+  <p className="text-sm text-gray-600 mb-4">
+    Aşağıdaki değerleri sizin için önem derecesine göre puanlayın (1: Hiç önemli değil, 5: Çok önemli)
+  </p>
+  
+  <div className="space-y-4">
+    {[
+      { 
+        key: 'maas', 
+        label: 'Yüksek Maaş ve Finansal Güvenlik', 
+        icon: '💰',
+        aciklama: 'İyi bir gelir seviyesi ve ekonomik güvence'
+      },
+      { 
+        key: 'denge', 
+        label: 'İş-Yaşam Dengesi', 
+        icon: '⚖️',
+        aciklama: 'Esnek çalışma saatleri ve kişisel zamanınızı koruma'
+      },
+      { 
+        key: 'yaraticilik', 
+        label: 'Yaratıcılık ve İnovasyon', 
+        icon: '🎨',
+        aciklama: 'Yeni fikirler üretme ve yaratıcı projeler yapma'
+      },
+      { 
+        key: 'yardim', 
+        label: 'İnsanlara Yardım Etme', 
+        icon: '🤝',
+        aciklama: 'Topluma fayda sağlama ve başkalarının hayatını iyileştirme'
+      },
+      { 
+        key: 'prestij', 
+        label: 'Prestij ve Tanınırlık', 
+        icon: '👑',
+        aciklama: 'Saygın bir pozisyonda olma ve toplumsal statü'
+      },
+      { 
+        key: 'guvenlik', 
+        label: 'İş Güvenliği ve Kararlılık', 
+        icon: '🛡️',
+        aciklama: 'İşsiz kalma riski düşük, istikrarlı bir kariyer'
+      },
+      { 
+        key: 'ozgurluk', 
+        label: 'Özgürlük ve Bağımsızlık', 
+        icon: '🕊️',
+        aciklama: 'Kendi kararlarınızı alma ve serbest çalışma'
+      },
+      { 
+        key: 'gelisim', 
+        label: 'Kişisel Gelişim ve Öğrenme', 
+        icon: '📚',
+        aciklama: 'Sürekli yeni beceriler kazanma ve kendini geliştirme'
+      }
+    ].map((deger) => (
+      <div key={deger.key} className="bg-gray-50 rounded-lg p-4">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center">
+            <span className="text-2xl mr-3">{deger.icon}</span>
+            <div>
+              <h4 className="font-medium text-gray-900">{deger.label}</h4>
+              <p className="text-sm text-gray-600">{deger.aciklama}</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-2">
+            {[1, 2, 3, 4, 5].map((puan) => (
+              <button
+                key={puan}
+                type="button"
+                className="w-8 h-8 rounded-full border-2 border-gray-300 hover:border-blue-500 focus:border-blue-500 focus:bg-blue-500 focus:text-white transition-colors text-sm font-medium"
+              >
+                {puan}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+{/* Çalışma Tarzı Tercihleri */}
+<div className="mb-8">
+  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+    3. Çalışma Tarzı Tercihleri
+  </h3>
+  
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Tercih Ettiğiniz Çalışma Ortamı
+      </label>
+      <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="">Seçiniz</option>
+        <option value="ofis">Kapalı Ofis Ortamı</option>
+        <option value="acik-ofis">Açık Ofis / Co-working</option>
+        <option value="uzaktan">Uzaktan Çalışma</option>
+        <option value="saha">Saha / Dış Mekan</option>
+        <option value="hibrit">Hibrit (Ofis + Ev)</option>
+        <option value="serbest">Serbest Meslek</option>
+      </select>
+    </div>
+    
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Çalışma Şekli Tercihi
+      </label>
+      <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="">Seçiniz</option>
+        <option value="bireysel">Bireysel Çalışma</option>
+        <option value="takim">Takım Çalışması</option>
+        <option value="liderlik">Liderlik Pozisyonu</option>
+        <option value="karma">Karma (Bireysel + Takım)</option>
+      </select>
+    </div>
+    
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Çalışma Temposu
+      </label>
+      <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="">Seçiniz</option>
+        <option value="yavas">Sakin ve Düzenli</option>
+        <option value="orta">Orta Tempo</option>
+        <option value="hizli">Hızlı ve Dinamik</option>
+        <option value="proje-bazli">Proje Bazlı Yoğunluk</option>
+      </select>
+    </div>
+    
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Seyahat Etme İsteği
+      </label>
+      <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="">Seçiniz</option>
+        <option value="hic">Seyahat İstemiyorum</option>
+        <option value="az">Nadiren (Ayda 1-2 gün)</option>
+        <option value="orta">Bazen (Haftada 1-2 gün)</option>
+        <option value="cok">Sık Sık (Sürekli seyahat)</option>
+      </select>
+    </div>
+  </div>
+</div>
+
           {/* Test Sonucu Girişi */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
