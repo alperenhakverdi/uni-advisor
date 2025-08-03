@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 // Tip tanımlamaları
 interface TestVerileri {
@@ -17,6 +18,8 @@ interface TestVerileri {
 }
 
 export default function TestSonucuSayfasi() {
+  const router = useRouter();
+  
   // State management
   const [aktifAdim, setAktifAdim] = useState<number>(1);
   const [testVerileri, setTestVerileri] = useState<TestVerileri>({
@@ -31,7 +34,6 @@ export default function TestSonucuSayfasi() {
     kisiselGelisim: {}
   });
   const [analizediliyor, setAnalizediliyor] = useState(false);
-  const [analizTamamlandi, setAnalizTamamlandi] = useState(false);
 
   // MBTI seçenekleri
   const mbtiTipleri = [
@@ -72,19 +74,16 @@ export default function TestSonucuSayfasi() {
     }
   };
 
-  // AI Analizi başlatma
+  // AI Analizi başlatma - Görev 4 için güncellendi
   const analizBaslat = async () => {
     setAnalizediliyor(true);
     // Mock AI analizi (3 saniye)
     setTimeout(() => {
       setAnalizediliyor(false);
-      setAnalizTamamlandi(true);
+      // Results sayfasına yönlendir
+      router.push('/results');
     }, 3000);
   };
-
-  if (analizTamamlandi) {
-    return <AnalizSonucu testVerileri={testVerileri} />;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -551,7 +550,7 @@ export default function TestSonucuSayfasi() {
             </div>
           )}
 
-          {/* ADIM 6: Çalışma Ortamı (Mevcut) */}
+          {/* ADIM 6: Çalışma Ortamı */}
           {aktifAdim >= 6 && (
             <div className="bg-white rounded-lg shadow animate-fadeIn">
               <div className="p-6">
@@ -639,7 +638,7 @@ export default function TestSonucuSayfasi() {
             </div>
           )}
 
-          {/* ADIM 7: Yetkinlikler */}
+          {/* ADIM 7: Yetkinlikler - GELİŞTİRİLMİŞ SLIDER İLE */}
           {aktifAdim >= 7 && (
             <div className="bg-white rounded-lg shadow animate-fadeIn">
               <div className="p-6">
@@ -675,24 +674,66 @@ export default function TestSonucuSayfasi() {
                           <span className="text-2xl mr-3">{beceri.icon}</span>
                           <span className="font-medium text-gray-900">{beceri.label}</span>
                         </div>
-                        <div className="w-12 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-semibold">
-                          {testVerileri.yetkinlikler[beceri.key] || 0}
+                        <div className="w-14 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-lg font-bold shadow-sm">
+                          {testVerileri.yetkinlikler[beceri.key] || 1}
                         </div>
                       </div>
                       <div className="flex items-center space-x-4">
-                        <span className="text-sm text-gray-500 w-12">Zayıf</span>
-                        <input
-                          type="range"
-                          min="1"
-                          max="10"
-                          value={testVerileri.yetkinlikler[beceri.key] || 1}
-                          onChange={(e) => {
-                            const yeniYetkinlikler = {...testVerileri.yetkinlikler, [beceri.key]: parseInt(e.target.value)};
-                            veriGuncelle('yetkinlikler', yeniYetkinlikler);
-                          }}
-                          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                        />
-                        <span className="text-sm text-gray-500 w-12">Güçlü</span>
+                        <span className="text-sm text-gray-500 w-12 text-center">Zayıf</span>
+                        <div className="flex-1 relative">
+                          <input
+                            type="range"
+                            min="1"
+                            max="10"
+                            value={testVerileri.yetkinlikler[beceri.key] || 1}
+                            onChange={(e) => {
+                              const yeniYetkinlikler = {...testVerileri.yetkinlikler, [beceri.key]: parseInt(e.target.value)};
+                              veriGuncelle('yetkinlikler', yeniYetkinlikler);
+                            }}
+                            className="w-full h-4 bg-gray-400 rounded-full appearance-none cursor-pointer 
+                                     [&::-webkit-slider-thumb]:appearance-none 
+                                     [&::-webkit-slider-thumb]:w-6 
+                                     [&::-webkit-slider-thumb]:h-6 
+                                     [&::-webkit-slider-thumb]:bg-blue-600 
+                                     [&::-webkit-slider-thumb]:rounded-full 
+                                     [&::-webkit-slider-thumb]:shadow-lg
+                                     [&::-webkit-slider-thumb]:border-2
+                                     [&::-webkit-slider-thumb]:border-white
+                                     [&::-webkit-slider-thumb]:hover:bg-blue-700
+                                     [&::-webkit-slider-thumb]:transition-colors
+                                     [&::-moz-range-thumb]:w-6
+                                     [&::-moz-range-thumb]:h-6
+                                     [&::-moz-range-thumb]:bg-blue-600
+                                     [&::-moz-range-thumb]:rounded-full
+                                     [&::-moz-range-thumb]:border-none
+                                     [&::-moz-range-thumb]:shadow-lg
+                                     [&::-moz-range-track]:bg-gray-400
+                                     [&::-moz-range-track]:h-4
+                                     [&::-moz-range-track]:rounded-full"
+                          />
+                          {/* Slider track değer göstergesi */}
+                          <div 
+                            className="absolute top-0 left-0 h-4 bg-blue-200 rounded-full pointer-events-none transition-all duration-200"
+                            style={{ width: `${((testVerileri.yetkinlikler[beceri.key] || 1) - 1) / 9 * 100}%` }}
+                          />
+                        </div>
+                        <span className="text-sm text-gray-500 w-12 text-center">Güçlü</span>
+                      </div>
+                      
+                      {/* Değer göstergeli sayılar */}
+                      <div className="flex justify-between mt-2 px-2">
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                          <span 
+                            key={num} 
+                            className={`text-xs ${
+                              (testVerileri.yetkinlikler[beceri.key] || 1) === num 
+                                ? 'text-blue-600 font-bold' 
+                                : 'text-gray-400'
+                            }`}
+                          >
+                            {num}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   ))}
@@ -824,184 +865,3 @@ export default function TestSonucuSayfasi() {
     </div>
   );
 }
-
-// Analiz Sonuçları Komponenti
-function AnalizSonucu({ testVerileri }: { testVerileri: TestVerileri }) {
-  // Mock AI analiz sonucu
-  const analizSonucu = {
-    kisilikOzeti: `${testVerileri.mbtiSonucu} kişiliği ve ${testVerileri.hollandKodu} ilgi profili ile yaratıcı ve analitik bir yapınız var. Yüksek değer verdiğiniz özgürlük ve gelişim odaklı yaklaşımınız sizi dinamik sektörlere yönlendiriyor.`,
-    gucluYonler: [
-      "Yaratıcı problem çözme",
-      "Analitik düşünce",
-      "Bağımsız çalışma",
-      "Sürekli öğrenme isteği"
-    ],
-    gelisimAlanlari: [
-      "Takım çalışması becerilerini geliştirin",
-      "Stres yönetimi konusunda pratik yapın",
-      "Liderlik deneyiminizi artırın"
-    ],
-    uygunMeslekler: [
-      { isim: "UX/UI Tasarımcı", uygunluk: 96, aciklama: "Yaratıcılık ve teknik becerilerinizin mükemmel uyumu" },
-      { isim: "Veri Analisti", uygunluk: 91, aciklama: "Analitik düşünce ve problem çözme becerilerinize uygun" },
-      { isim: "Ürün Yöneticisi", uygunluk: 87, aciklama: "Stratejik düşünce ve inovasyon odaklı yaklaşımınıza uygun" },
-      { isim: "Grafik Tasarımcı", uygunluk: 84, aciklama: "Yaratıcılık ve görsel becerilerinizi kullanabileceğiniz alan" },
-      { isim: "İçerik Stratejisti", uygunluk: 82, aciklama: "İletişim ve yaratıcılık becerilerinizi birleştirebilirsiniz" }
-    ]
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link 
-              href="/dashboard"
-              className="text-blue-600 hover:text-blue-800"
-            >
-              ← Dashboard'a Dön
-            </Link>
-            <h1 className="text-xl font-semibold text-gray-900">
-              AI Kişilik Analizi Sonuçları
-            </h1>
-            <div className="flex space-x-2">
-              <button className="text-green-600 hover:text-green-800">PDF İndir</button>
-              <button className="text-blue-600 hover:text-blue-800">Paylaş</button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        
-        {/* Test Bilgisi */}         
-        <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-6 mb-8 text-white">
-          <h2 className="text-2xl font-bold mb-2">Kişisel Analiz Tamamlandı! 🎉</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-            <div>
-              <div className="text-lg font-semibold">MBTI</div>
-              <div className="text-purple-100">{testVerileri.mbtiSonucu}</div>
-            </div>
-            <div>
-              <div className="text-lg font-semibold">Holland</div>
-              <div className="text-purple-100">{testVerileri.hollandKodu}</div>
-            </div>
-            <div>
-              <div className="text-lg font-semibold">Test Bölümü</div>
-              <div className="text-purple-100">8/8 Tamamlandı</div>
-            </div>
-            <div>
-              <div className="text-lg font-semibold">Analiz Durumu</div>
-              <div className="text-purple-100">✓ Hazır</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Sol Kolon - Ana Analiz */}
-          <div className="lg:col-span-2 space-y-6">
-            
-            {/* Kişilik Özeti */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                🧠 Kişilik Özetiniz
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                {analizSonucu.kisilikOzeti}
-              </p>
-            </div>
-
-            {/* Güçlü Yönler */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                ⭐ Güçlü Yönleriniz
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {analizSonucu.gucluYonler.map((guc, index) => (
-                  <div key={index} className="flex items-center p-3 bg-green-50 rounded-lg">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                    <span className="text-green-800 font-medium">{guc}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Gelişim Alanları */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                📈 Gelişim Alanları
-              </h3>
-              <div className="space-y-3">
-                {analizSonucu.gelisimAlanlari.map((alan, index) => (
-                  <div key={index} className="flex items-start p-3 bg-orange-50 rounded-lg">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3"></div>
-                    <span className="text-orange-800 font-medium">{alan}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-          </div>
-
-          {/* Sağ Kolon - Meslek Önerileri */}
-          <div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                🎯 Size Uygun Meslekler
-              </h3>
-              <div className="space-y-4">
-                {analizSonucu.uygunMeslekler.map((meslek, index) => (
-                  <div key={index} className="border-l-4 border-blue-500 pl-4">
-                    <div className="flex justify-between items-center mb-1">
-                      <h4 className="font-medium text-gray-900">{meslek.isim}</h4>
-                      <span className="text-lg font-bold text-blue-600">%{meslek.uygunluk}</span>
-                    </div>
-                    <p className="text-sm text-gray-600 mb-2">{meslek.aciklama}</p>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-blue-600 h-2 rounded-full"
-                        style={{ width: `${meslek.uygunluk}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Sonraki Adımlar */}
-            <div className="mt-6 bg-blue-50 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-blue-900 mb-4">
-                🚀 Sonraki Adımlar
-              </h3>
-              <div className="space-y-3">
-                <Link
-                  href="/career-discovery"
-                  className="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
-                >
-                  Meslek Detaylarını İncele
-                </Link>
-                <Link
-                  href="/university-matcher"
-                  className="block w-full bg-purple-600 text-white text-center py-2 px-4 rounded-md hover:bg-purple-700 transition-colors"
-                >
-                  Uygun Üniversiteleri Bul
-                </Link>
-                <Link
-                  href="/chat"
-                  className="block w-full bg-gray-600 text-white text-center py-2 px-4 rounded-md hover:bg-gray-700 transition-colors"
-                >
-                  AI Danışmanla Konuş
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </main>
-    </div>
-  );
-}
-

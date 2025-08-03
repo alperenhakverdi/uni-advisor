@@ -273,7 +273,7 @@ export default function AnaSayfa() {
 
         </div>
 
-        {/* Third Feature Card - AI Analizimi Görmek İstiyorum */}
+        {/* Third Feature Card - AI Danışmanla Konuş (Sadece bu kaldı) */}
         <div className="flex justify-center mb-16">
           <div className={`group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 max-w-2xl w-full ${
             darkMode ? 'bg-gray-800' : 'bg-white'
@@ -287,34 +287,21 @@ export default function AnaSayfa() {
               </div>
               
               <h3 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                AI Analizimi Görmek İstiyorum
+                AI Danışmanla Konuş
               </h3>
               
               <p className={`text-lg mb-6 leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                Daha önce test yaptıysan, AI analiz sonuçlarına doğrudan ulaş. 
-                Kişiselleştirilmiş meslek önerilerini ve gelişim planını keşfet.
+                Kariyer sorularınız için AI danışmanımızla konuşun. 
+                Kişiselleştirilmiş tavsiyeleri ve rehberliği anında alın.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
-                  href="/results"
-                  className="inline-flex items-center justify-center bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-3 rounded-xl hover:from-green-700 hover:to-blue-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                >
-                  <span className="mr-2">📊</span>
-                  Sonuçlarımı Gör
-                </Link>
-                <Link 
-                  href="/chat"
-                  className={`inline-flex items-center justify-center border-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 ${
-                    darkMode 
-                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                      : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <span className="mr-2">💬</span>
-                  AI Danışmanla Konuş
-                </Link>
-              </div>
+              <Link 
+                href="/chat"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-3 rounded-xl hover:from-green-700 hover:to-blue-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                <span className="mr-2">💬</span>
+                AI Danışmanla Konuş
+              </Link>
             </div>
           </div>
         </div>
@@ -416,19 +403,19 @@ export default function AnaSayfa() {
             </div>
             
             {/* Company */}
-<div>
-  <h3 className={`text-sm font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-    Şirket
-  </h3>
-  <ul className="space-y-2">
-    <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Hakkımızda</a></li>
-    <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Blog</a></li>
-    <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Gizlilik Politikası</a></li>
-    <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Kullanım Şartları</a></li>
-    <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>İletişim</a></li>
-    <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Destek</a></li>
-  </ul>
-</div>
+            <div>
+              <h3 className={`text-sm font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                Şirket
+              </h3>
+              <ul className="space-y-2">
+                <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Hakkımızda</a></li>
+                <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Blog</a></li>
+                <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Gizlilik Politikası</a></li>
+                <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Kullanım Şartları</a></li>
+                <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>İletişim</a></li>
+                <li><a href="#" className={`text-sm transition-colors ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Destek</a></li>
+              </ul>
+            </div>
             
           </div>
           

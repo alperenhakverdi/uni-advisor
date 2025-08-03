@@ -83,22 +83,14 @@ export default function KisilikTestiSayfasi() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a 
-                  href="https://www.16personalities.com/tr" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-semibold text-center btn-transition"
-                >
-                  🚀 Teste Git
-                </a>
-                <Link
-                  href="/assessment/external"
-                  className="flex-1 bg-gray-100 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors font-semibold text-center border border-gray-300 btn-transition"
-                >
-                  ✅ Sonucum Var
-                </Link>
-              </div>
+              <a 
+                href="https://www.16personalities.com/tr" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-semibold text-center btn-transition block"
+              >
+                🚀 Teste Git
+              </a>
             </div>
           </div>
 
@@ -148,22 +140,14 @@ export default function KisilikTestiSayfasi() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a 
-                  href="https://www.truity.com/test/holland-code-career-test" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold text-center btn-transition"
-                >
-                  🚀 Teste Git
-                </a>
-                <Link
-                  href="/assessment/external"
-                  className="flex-1 bg-gray-100 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors font-semibold text-center border border-gray-300 btn-transition"
-                >
-                  ✅ Sonucum Var
-                </Link>
-              </div>
+              <a 
+                href="https://www.truity.com/test/holland-code-career-test" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold text-center btn-transition block"
+              >
+                🚀 Teste Git
+              </a>
             </div>
           </div>
 
