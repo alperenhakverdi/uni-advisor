@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { getAuthenticatedUser, successResponse, errorResponse, validateRequest, handleApiError, chatMessageSchema, rateLimit } from '@/lib/api';
 import { db } from '@/lib/supabase';
-import { geminiService } from '@/lib/ai';
+import { GeminiService } from '@/lib/ai'; 
 
 export async function GET(request: NextRequest) {
   try {
@@ -60,6 +60,7 @@ export async function POST(request: NextRequest) {
     const recentHistory = await db.getChatHistory(user.id, 10);
 
     // Generate AI response
+    const geminiService = new GeminiService();
     const aiResponse = await geminiService.generateChatResponse(
       message,
       userContext,
@@ -93,7 +94,7 @@ export async function DELETE(request: NextRequest) {
       return errorResponse('Unauthorized', 401);
     }
 
-    // Delete all chat history for user
+    // Delete all chat history for user - ✅ Düzeltildi
     const { error } = await db.supabase
       .from('chat_messages')
       .delete()

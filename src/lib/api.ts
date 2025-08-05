@@ -36,7 +36,7 @@ export function errorResponse(error: string, status: number = 400): NextResponse
   } as APIResponse<null>, { status });
 }
 
-// Request validation
+// Request validation - ✅ DÜZELTME: Zod error handling
 export async function validateRequest<T>(
   request: NextRequest,
   schema: z.ZodSchema<T>
@@ -47,7 +47,8 @@ export async function validateRequest<T>(
     return { success: true, data };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const errorMessage = error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', ');
+      // ✅ DÜZELTME: issues kullan, errors değil
+      const errorMessage = error.issues.map((e: z.ZodIssue) => `${e.path.join('.')}: ${e.message}`).join(', ');
       return { success: false, error: `Validation error: ${errorMessage}` };
     }
     return { success: false, error: 'Invalid JSON format' };

@@ -302,4 +302,31 @@ Türkiye iş piyasasını dikkate al.`;
         match_percentage: 89,
         reasoning: "Yaratıcılık ve analitik düşünce becerilerinin uyumu",
         strengths: ["Sosyal medya", "İçerik üretimi", "Analiz"],
-        growth_areas: ["Veri analizi", "SEO", "PPC
+        growth_areas: ["Veri analizi", "SEO", "PPC Yönetimi"],
+        salary_range: "5K-15K TL",
+        job_outlook: "Yüksek talep, dijital dönüşüm"
+      },
+      {
+        career: "Veri Analisti",
+        match_percentage: 85,
+        reasoning: "Analitik düşünce ve problem çözme becerileri",
+        strengths: ["İstatistik", "Excel", "Raporlama"],
+        growth_areas: ["Python", "Machine Learning", "Büyük veri"],
+        salary_range: "7K-18K TL",
+        job_outlook: "Çok yüksek talep, AI boom"
+      },
+      {
+        career: "UX/UI Tasarımcı",
+        match_percentage: 82,
+        reasoning: "Yaratıcılık ve kullanıcı odaklı düşünce",
+        strengths: ["Tasarım", "Empati", "Problem çözme"],
+        growth_areas: ["Figma", "User Research", "Prototyping"],
+        salary_range: "6K-16K TL",
+        job_outlook: "Yüksek talep, dijital ürünler"
+      }
+    ];
+  }
+}
+
+// Export singleton instance
+export const geminiService = new GeminiService();

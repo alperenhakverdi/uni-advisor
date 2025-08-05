@@ -26,7 +26,7 @@ export const createSupabaseServerClient = () => {
 
 // Database helper functions
 export class DatabaseService {
-  private supabase;
+  public supabase; // ✅ Düzeltildi: public yaptık
 
   constructor(useAdmin = false) {
     this.supabase = useAdmin ? supabaseAdmin : supabase;
@@ -105,7 +105,7 @@ export class DatabaseService {
 
     const { data, error } = await query;
     if (error) throw error;
-    return data;
+    return data || [];
   }
 
   async getLatestTestResult(userId: string, testType: string) {

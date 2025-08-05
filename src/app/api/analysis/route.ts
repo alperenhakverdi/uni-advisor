@@ -69,7 +69,8 @@ export async function POST(request: NextRequest) {
     const assessmentData = prepareAssessmentData(userData);
 
     // Generate new analysis
-    let aiResponse;
+    let aiResponse: any;
+    let confidenceScore = 0.8; // Default confidence score
     
     switch (analysisType) {
       case 'career_match':
@@ -77,17 +78,30 @@ export async function POST(request: NextRequest) {
         const hollandCode = userData.testResults.find(t => t.test_type === 'holland')?.result_data?.code;
         const skills = userData.testResults.find(t => t.test_type === 'skills')?.result_data;
         
+        // CareerMatchResult[] döndürür
         aiResponse = await geminiService.generateCareerMatches(
-          mbtiResult, 
-          hollandCode, 
-          skills, 
+          mbtiResult || 'ISFJ', 
+          hollandCode || 'SIA', 
+          skills || {}, 
           userData.profile
         );
+        
+        // CareerMatchResult[] için confidence score hesapla
+        if (Array.isArray(aiResponse) && aiResponse.length > 0) {
+          const avgMatchPercentage = aiResponse.reduce((sum, career) => sum + career.match_percentage, 0) / aiResponse.length;
+          confidenceScore = avgMatchPercentage / 100;
+        }
         break;
         
       case 'comprehensive':
       default:
+        // ComprehensiveAnalysis döndürür (confidence_score içerir)
         aiResponse = await geminiService.generateComprehensiveAnalysis(assessmentData);
+        
+        // ✅ GÜVENLI ERİŞİM: confidence_score varsa kullan
+        if (aiResponse && typeof aiResponse === 'object' && 'confidence_score' in aiResponse) {
+          confidenceScore = aiResponse.confidence_score || 0.8;
+        }
         break;
     }
 
@@ -97,7 +111,7 @@ export async function POST(request: NextRequest) {
       analysis_type: analysisType,
       input_data: assessmentData,
       ai_response: aiResponse,
-      confidence_score: aiResponse.confidence_score || 0.8,
+      confidence_score: confidenceScore, // ✅ DÜZELTME: Güvenli confidence_score
       version: 1,
     });
 
@@ -107,6 +121,7 @@ export async function POST(request: NextRequest) {
     }, 'Analysis generated successfully');
     
   } catch (error) {
+    console.error('Analysis API error:', error);
     return handleApiError(error);
   }
 }
@@ -123,16 +138,16 @@ function prepareAssessmentData(userData: any) {
 
   return {
     profileData: {
-      age_range: profile.age_range || '',
-      education_level: profile.education_level || '',
-      current_status: profile.current_status || '',
-      city: profile.city || '',
-      family_income: profile.family_income || '',
-      tyt_score: profile.tyt_score,
-      ayt_score: profile.ayt_score,
-      gpa: profile.gpa,
-      career_goal: profile.career_goal,
-      target_timeline: profile.target_timeline || '',
+      age_range: profile?.age_range || '',
+      education_level: profile?.education_level || '',
+      current_status: profile?.current_status || '',
+      city: profile?.city || '',
+      family_income: profile?.family_income || '',
+      tyt_score: profile?.tyt_score || null,
+      ayt_score: profile?.ayt_score || null,
+      gpa: profile?.gpa || null,
+      career_goal: profile?.career_goal || '',
+      target_timeline: profile?.target_timeline || '',
     },
     mbtiResult: mbtiTest?.result_data?.result || 'ISFJ',
     hollandCode: hollandTest?.result_data?.code || 'SIA',
@@ -164,3 +179,27 @@ function prepareAssessmentData(userData: any) {
       leadership_desire: 'Takım üyesi olmayı tercih ederim',
       feedback_approach: 'Zorlanırım ama kabul ederim',
       multitasking: 'Halledebilirim',
+    },
+    workEnvironment: workStyleTest?.result_data?.work_environment || {
+      environment: 'Ofis ortamı',
+      work_format: 'Hibrit çalışma',
+      pace: 'Normal tempo',
+      travel_desire: 'Bazen',
+    },
+    skills: skillsTest?.result_data || {
+      mathematics: 5,
+      verbal_communication: 6,
+      technical_skills: 4,
+      leadership: 5,
+      creativity: 6,
+      problem_solving: 7,
+      social_skills: 6,
+      organization: 7,
+    },
+    personalDevelopment: workStyleTest?.result_data?.personal_development || {
+      learning_style: 'Karma yöntem',
+      change_preference: 'Dengeli - hem yenilik hem rutin',
+      mentorship_preference: 'Mentor veya rehber isterim',
+    }
+  };
+}
