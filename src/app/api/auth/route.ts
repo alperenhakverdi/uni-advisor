@@ -1,4 +1,4 @@
-// src/app/api/auth/route.ts - Düzeltilmiş
+// src/app/api/auth/route.ts
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
@@ -66,7 +66,6 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     if (error instanceof z.ZodError) {
-      // ✅ Düzeltildi: issues kullan
       return NextResponse.json(
         { error: error.issues[0].message },
         { status: 400 }
@@ -107,7 +106,6 @@ export async function PUT(request: NextRequest) {
 
   } catch (error) {
     if (error instanceof z.ZodError) {
-      // ✅ Düzeltildi: issues kullan
       return NextResponse.json(
         { error: error.issues[0].message },
         { status: 400 }
@@ -121,23 +119,43 @@ export async function PUT(request: NextRequest) {
   }
 }
 
-// Sign Out
+// Sign Out - DÜZELTME
 export async function DELETE() {
   try {
-    const supabase = createRouteHandlerClient({ cookies })
+    const cookieStore = cookies()
+    const supabase = createRouteHandlerClient({ cookies: () => cookieStore })
 
+    // Sign out from Supabase
     const { error } = await supabase.auth.signOut()
 
     if (error) {
+      console.error('Sign out error:', error)
       return NextResponse.json(
         { error: 'Çıkış yapılırken hata oluştu' },
         { status: 500 }
       )
     }
 
-    return NextResponse.json({ message: 'Başarıyla çıkış yapıldı' })
+    // Clear auth cookies
+    const response = NextResponse.json({ 
+      message: 'Başarıyla çıkış yapıldı',
+      success: true 
+    })
+
+    // Clear Supabase auth cookies
+    response.cookies.set('sb-access-token', '', {
+      path: '/',
+      maxAge: 0
+    })
+    response.cookies.set('sb-refresh-token', '', {
+      path: '/',
+      maxAge: 0
+    })
+
+    return response
 
   } catch (error) {
+    console.error('Sign out error:', error)
     return NextResponse.json(
       { error: 'Çıkış yapılırken hata oluştu' },
       { status: 500 }

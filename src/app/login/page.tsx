@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/auth-client' // ✅ DÜZELTME: auth-client'ten import
+import { createClient } from '@/lib/auth-client'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -18,24 +18,44 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
+    console.log('Login attempt:', { email }) // Debug
+
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const { data, error: loginError } = await supabase.auth.signInWithPassword({
+        email: email.trim(), // ✅ DÜZELTME: Trim ekle
+        password: password,
       })
 
-      if (error) {
-        setError('E-posta veya şifre hatalı')
+      console.log('Login response:', { data, error: loginError }) // Debug
+
+      if (loginError) {
+        console.error('Login error details:', loginError)
+        
+        // Spesifik hata mesajları
+        if (loginError.message.includes('Invalid login credentials')) {
+          setError('E-posta veya şifre hatalı')
+        } else if (loginError.message.includes('Email not confirmed')) {
+          setError('E-posta adresinizi doğrulamanız gerekiyor')
+        } else {
+          setError(`Giriş hatası: ${loginError.message}`)
+        }
+        setLoading(false)
         return
       }
 
-      if (data.user) {
-        router.push('/dashboard')
-        router.refresh()
+      if (data?.user) {
+        console.log('Login successful, user:', data.user.id)
+        
+        // ✅ BASIT YÖNLENDİRME: Direkt dashboard'a git
+        window.location.href = '/dashboard'
+        
+      } else {
+        setError('Giriş başarısız: Kullanıcı bilgisi alınamadı')
       }
 
     } catch (err) {
-      setError('Giriş yapılırken bir hata oluştu')
+      console.error('Login catch error:', err)
+      setError('Giriş yapılırken beklenmeyen bir hata oluştu')
     } finally {
       setLoading(false)
     }
@@ -61,7 +81,7 @@ export default function LoginPage() {
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
-              {error}
+              <strong>Hata:</strong> {error}
             </div>
           )}
 
@@ -78,8 +98,11 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="ornek@email.com"
+                placeholder="Kayıt olduğunuz e-posta"
               />
+              <div className="text-xs text-gray-500 mt-1">
+                Girdiğiniz e-posta: {email}
+              </div>
             </div>
 
             <div>
@@ -96,6 +119,9 @@ export default function LoginPage() {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Şifrenizi girin"
               />
+              <div className="text-xs text-gray-500 mt-1">
+                Şifre uzunluğu: {password.length} karakter
+              </div>
             </div>
           </div>
 
@@ -118,6 +144,14 @@ export default function LoginPage() {
                 'Giriş Yap'
               )}
             </button>
+          </div>
+
+          {/* DEBUG BİLGİLERİ */}
+          <div className="bg-gray-100 p-3 rounded text-xs">
+            <strong>Debug Info:</strong><br/>
+            Email: {email}<br/>
+            Password Length: {password.length}<br/>
+            F12 → Console'dan detayları görebilirsiniz
           </div>
 
           <div className="text-center">

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/auth-client' // ✅ DÜZELTME: auth-client'ten import
+import { createClient } from '@/lib/auth-client'
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -64,24 +64,37 @@ export default function RegisterPage() {
         } else {
           setError('Kayıt olurken bir hata oluştu: ' + error.message)
         }
+        setLoading(false)
         return
       }
 
       if (data.user) {
-        // Create user profile
-        const { error: profileError } = await supabase
-          .from('user_profiles')
-          .insert({
-            user_id: data.user.id,
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-          })
+        console.log('User created:', data.user.id) // Debug
 
-        if (profileError) {
-          console.error('Profile creation error:', profileError)
+        // Create user profile - ✅ DÜZELTME: Detaylı hata yakalama
+        try {
+          const { data: profileData, error: profileError } = await supabase
+            .from('user_profiles')
+            .insert({
+              user_id: data.user.id,
+              first_name: formData.firstName,
+              last_name: formData.lastName,
+            })
+            .select()
+
+          if (profileError) {
+            console.error('Profile creation error details:', profileError)
+            // Profile hatası olsa bile kayıt başarılı sayalım
+            console.warn('Profile oluşturulamadı ama kayıt başarılı:', profileError.message)
+          } else {
+            console.log('Profile created successfully:', profileData)
+          }
+        } catch (profileErr) {
+          console.error('Profile creation failed:', profileErr)
+          // Profile hatası olsa bile devam et
         }
 
-        setSuccess('Kayıt başarılı! E-posta adresinizi kontrol edin.')
+        setSuccess('Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...')
         
         // Redirect to login after 2 seconds
         setTimeout(() => {
@@ -90,8 +103,8 @@ export default function RegisterPage() {
       }
 
     } catch (err) {
-      setError('Kayıt olurken bir hata oluştu')
       console.error('Registration error:', err)
+      setError('Kayıt olurken bir hata oluştu')
     } finally {
       setLoading(false)
     }
