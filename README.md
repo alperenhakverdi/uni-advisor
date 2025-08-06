@@ -2,9 +2,9 @@
 
 <div align="center">
 
-**AI-Powered Career Guidance Platform**
+## **AI-Powered Career Guidance Platform**
 
-*Kişiselleştirilmiş kariyer rehberliği ve meslek keşfi platformu*
+### *Kişiselleştirilmiş kariyer rehberliği ve meslek keşfi platformu*
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.4-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
@@ -12,7 +12,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38bdf8?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 [![Google Gemini](https://img.shields.io/badge/Google-Gemini_AI-orange?style=flat-square&logo=google)](https://ai.google/)
 
-[🌟 Demo](http://localhost:3000) • [📖 Dokümantasyon](#-özellikler) • [🚀 Kurulum](#-kurulum)
+[📖 Dokümantasyon](#-özellikler) • [🚀 Kurulum](#-kurulum) • [🤝 İletişim](#-i̇letişim--destek)
 
 </div>
 
@@ -22,6 +22,7 @@
 
 - [Proje Hakkında](#-proje-hakkında)
 - [Özellikler](#-özellikler)
+- [Önizleme](#-önizleme)
 - [Teknoloji Stack](#-teknoloji-stack)
 - [Kurulum](#-kurulum)
 - [Kullanım](#-kullanım)
@@ -74,6 +75,16 @@
 
 ---
 
+## 📸 Önizleme
+
+### 🏠 Ana Sayfa
+![Ana Sayfa](https://github.com/user-attachments/assets/5cf55193-0416-40d9-8c5e-ec12290865a2)
+
+### 💬 AI Chat Koç
+![AI Chat](https://github.com/user-attachments/assets/54c2821e-ee93-4fa3-87d2-8ad78aad2f7b)
+
+---
+
 ## 🛠️ Teknoloji Stack
 
 ### Frontend
@@ -97,6 +108,12 @@ Zod                # Schema Validation
 ESLint             # Code Linting
 Turbopack          # Fast Bundler
 PostCSS            # CSS Processing
+```
+
+### Deployment
+```
+Vercel             # Hosting Platform
+Environment Config # Secure Variables
 ```
 
 ---
@@ -256,6 +273,6 @@ Bu proje [MIT License](LICENSE) altında lisanslanmıştır.
 
 **⭐ Bu projeyi beğendiyseniz yıldız vermeyi unutmayın! ⭐**
 
-*Made with ❤️ by Alperen Hakverdi*
+*Made with ❤️ by Alperen Hakverdi and Oğuzhan Harman*
 
 </div>
