@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![CareerPath AI Logo](https://via.placeholder.com/200x80/4F46E5/FFFFFF?text=CareerPath+AI)
-
 **AI-Powered Career Guidance Platform**
 
 *Kişiselleştirilmiş kariyer rehberliği ve meslek keşfi platformu*
@@ -99,12 +97,6 @@ Zod                # Schema Validation
 ESLint             # Code Linting
 Turbopack          # Fast Bundler
 PostCSS            # CSS Processing
-```
-
-### Deployment
-```
-Vercel             # Hosting Platform
-Environment Config # Secure Variables
 ```
 
 ---
